@@ -11,3 +11,5 @@ Needless to say, it can also just provide the non-weekend duration between the t
 An example on how to use TimeSurfer is shown in src/Main
 
 The best part is, it is O(1) in time and space complexity both, no matter how big the period in between the two dates. 
+
+### As usual, coder discretion is advised when using code procured from the web. 
