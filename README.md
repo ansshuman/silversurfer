@@ -12,4 +12,4 @@ An example on how to use TimeSurfer is shown in src/Main
 
 The best part is, it is O(1) in time and space complexity both, no matter how big the period in between the two dates. 
 
-### As usual, coder discretion is advised when using code procured from the web. 
+###### As usual, coder discretion is advised when using code procured from the web. 
