@@ -1,5 +1,10 @@
+# OS
 .DS_Store
+
+# IDE
 .idea/*
+
+# Generated
 *.pyc
 *.class
 out/*
