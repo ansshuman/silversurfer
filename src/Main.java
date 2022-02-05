@@ -1,7 +1,7 @@
 import time.TimeSurfer;
+import static time.util.Constants.*;
 
 import java.util.Date;
-import static time.util.Constants.*;
 
 public class Main {
 
