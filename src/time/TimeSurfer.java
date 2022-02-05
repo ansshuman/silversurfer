@@ -1,13 +1,14 @@
-package com.silversurfer.time.util;
+package time;
 
 /*
     Author : Anshuman Singh
     Email : ansshu.sin@gmail.com
  */
 
+import time.util.Constants;
+
 import java.util.Calendar;
 import java.util.Date;
-import static com.silversurfer.time.util.Constants.*;
 
 public abstract class TimeSurfer {
 
@@ -52,8 +53,8 @@ public abstract class TimeSurfer {
         this.work_day_end_sec = 0;
         this.work_day_end_ms = 0;
 
-        this.work_day_start_time = this.work_day_start_hour * MILLIS_IN_HOUR;
-        this.work_day_end_time = this.work_day_end_hour * MILLIS_IN_HOUR;
+        this.work_day_start_time = this.work_day_start_hour * Constants.MILLIS_IN_HOUR;
+        this.work_day_end_time = this.work_day_end_hour * Constants.MILLIS_IN_HOUR;
 
         this.duration = this.end.getTime() - this.start.getTime();
         this.nonWeekendTime = calculateNonWeekendTimeInMillis(this.start, this.end);
@@ -88,9 +89,9 @@ public abstract class TimeSurfer {
         this.work_day_end_sec = Integer.parseInt(work_day_end_hms[2]);
         this.work_day_end_ms = Integer.parseInt(work_day_end_hms[3]);
 
-        this.work_day_start_time = this.work_day_start_hour * MILLIS_IN_HOUR + this.work_day_start_min * MILLIS_IN_MINUTE + this.work_day_start_sec * MILLIS_IN_SECOND + this.work_day_start_ms;
+        this.work_day_start_time = this.work_day_start_hour * Constants.MILLIS_IN_HOUR + this.work_day_start_min * Constants.MILLIS_IN_MINUTE + this.work_day_start_sec * Constants.MILLIS_IN_SECOND + this.work_day_start_ms;
 
-        this.work_day_end_time = this.work_day_end_hour * MILLIS_IN_HOUR + this.work_day_end_min * MILLIS_IN_MINUTE + this.work_day_end_sec * MILLIS_IN_SECOND + this.work_day_end_ms;
+        this.work_day_end_time = this.work_day_end_hour * Constants.MILLIS_IN_HOUR + this.work_day_end_min * Constants.MILLIS_IN_MINUTE + this.work_day_end_sec * Constants.MILLIS_IN_SECOND + this.work_day_end_ms;
 
         this.duration = this.end.getTime() - this.start.getTime();
         this.nonWeekendTime = calculateNonWeekendTimeInMillis(this.start, this.end);
@@ -119,9 +120,9 @@ public abstract class TimeSurfer {
 
         if (startIsSat || startIsSun) {
             if (startIsSat) {
-                addTimeToCal(sCal, 2 * MILLIS_IN_DAY);
+                addTimeToCal(sCal, 2 * Constants.MILLIS_IN_DAY);
             } else {
-                addTimeToCal(sCal, MILLIS_IN_DAY);
+                addTimeToCal(sCal, Constants.MILLIS_IN_DAY);
             }
             sCal.set(Calendar.HOUR_OF_DAY, 0);
             sCal.set(Calendar.MINUTE, 0);
@@ -131,9 +132,9 @@ public abstract class TimeSurfer {
 
         if (endIsSat || endIsSun) {
             if (endIsSun) {
-                addTimeToCal(eCal, -2 * MILLIS_IN_DAY);
+                addTimeToCal(eCal, -2 * Constants.MILLIS_IN_DAY);
             } else {
-                addTimeToCal(eCal, -1 * MILLIS_IN_DAY);
+                addTimeToCal(eCal, -1 * Constants.MILLIS_IN_DAY);
             }
             eCal.set(Calendar.HOUR_OF_DAY, 23);
             eCal.set(Calendar.MINUTE, 59);
@@ -143,8 +144,8 @@ public abstract class TimeSurfer {
 
         long dur = eCal.getTimeInMillis() - sCal.getTimeInMillis();
         if (dur <= 0) return 0L;
-        long wt = 0, numWeeks = dur / (MILLIS_IN_WEEK);
-        wt += numWeeks * MILLIS_IN_WEEK;
+        long wt = 0, numWeeks = dur / (Constants.MILLIS_IN_WEEK);
+        wt += numWeeks * Constants.MILLIS_IN_WEEK;
         addTimeToCal(sCal, wt);
         dur -= wt;
         wt *= 5;
@@ -152,10 +153,10 @@ public abstract class TimeSurfer {
         wt += dur;
         while (sCal.getTimeInMillis() <= eCal.getTimeInMillis()) {
             if (sCal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-                wt -= 2 * MILLIS_IN_DAY;
+                wt -= 2 * Constants.MILLIS_IN_DAY;
                 break;
             }
-            addTimeToCal(sCal, MILLIS_IN_DAY);
+            addTimeToCal(sCal, Constants.MILLIS_IN_DAY);
         }
 
         if (endIsSat || endIsSun) wt += 1;
@@ -183,7 +184,7 @@ public abstract class TimeSurfer {
 
         if (sCalDayTime < work_day_start_time || sCalDayTime > work_day_end_time) {
             if (sCalDayTime > work_day_end_time) {
-                addTimeToCal(sCal, MILLIS_IN_DAY);
+                addTimeToCal(sCal, Constants.MILLIS_IN_DAY);
             }
             sCal.set(Calendar.HOUR_OF_DAY, work_day_start_hour);
             sCal.set(Calendar.MINUTE, work_day_start_min);
@@ -193,7 +194,7 @@ public abstract class TimeSurfer {
 
         if (eCalDayTime < work_day_start_time || eCalDayTime > work_day_end_time) {
             if (eCalDayTime < work_day_start_time) {
-                addTimeToCal(eCal, -1 * MILLIS_IN_DAY);
+                addTimeToCal(eCal, -1 * Constants.MILLIS_IN_DAY);
             }
             eCal.set(Calendar.HOUR_OF_DAY, work_day_end_hour);
             eCal.set(Calendar.MINUTE, work_day_end_min);
@@ -212,9 +213,9 @@ public abstract class TimeSurfer {
 
         if (startIsSat || startIsSun) {
             if (startIsSat) {
-                addTimeToCal(sCal, 2 * MILLIS_IN_DAY);
+                addTimeToCal(sCal, 2 * Constants.MILLIS_IN_DAY);
             } else {
-                addTimeToCal(sCal, MILLIS_IN_DAY);
+                addTimeToCal(sCal, Constants.MILLIS_IN_DAY);
             }
             sCal.set(Calendar.HOUR_OF_DAY, work_day_start_hour);
             sCal.set(Calendar.MINUTE, work_day_start_min);
@@ -224,9 +225,9 @@ public abstract class TimeSurfer {
 
         if (endIsSat || endIsSun) {
             if (endIsSun) {
-                addTimeToCal(eCal, -2 * MILLIS_IN_DAY);
+                addTimeToCal(eCal, -2 * Constants.MILLIS_IN_DAY);
             } else {
-                addTimeToCal(eCal, -1 * MILLIS_IN_DAY);
+                addTimeToCal(eCal, -1 * Constants.MILLIS_IN_DAY);
             }
             eCal.set(Calendar.HOUR_OF_DAY, work_day_end_hour);
             eCal.set(Calendar.MINUTE, work_day_end_min);
@@ -237,14 +238,14 @@ public abstract class TimeSurfer {
         if (sCal.getTime().compareTo(eCal.getTime()) >= 0) return 0L;
 
         long non_weekend_time = calculateNonWeekendTimeInMillis(sCal.getTime(), eCal.getTime());
-        long non_weekend_days = non_weekend_time / MILLIS_IN_DAY, rem = non_weekend_time % MILLIS_IN_DAY;
-        long res = (non_weekend_days * MILLIS_IN_DAY * (work_day_end_time - work_day_start_time)) / MILLIS_IN_DAY;
+        long non_weekend_days = non_weekend_time / Constants.MILLIS_IN_DAY, rem = non_weekend_time % Constants.MILLIS_IN_DAY;
+        long res = (non_weekend_days * Constants.MILLIS_IN_DAY * (work_day_end_time - work_day_start_time)) / Constants.MILLIS_IN_DAY;
 
         if (getDayTime(sCal) <= getDayTime(eCal)) {
             return res + rem;
         }
 
-        return res + rem - ((MILLIS_IN_DAY - work_day_end_time) + work_day_start_time);
+        return res + rem - ((Constants.MILLIS_IN_DAY - work_day_end_time) + work_day_start_time);
 
     }
 
@@ -287,14 +288,14 @@ public abstract class TimeSurfer {
     public String getHMS(long milliseconds) {
 
         long millis = milliseconds;
-        long days = millis / MILLIS_IN_DAY;
-        millis = millis % MILLIS_IN_DAY;
-        long hours = millis / (MILLIS_IN_HOUR);
-        millis = millis % (MILLIS_IN_HOUR);
-        long min = millis / (MILLIS_IN_MINUTE);
-        millis = millis % (MILLIS_IN_MINUTE);
-        long secs = millis / (MILLIS_IN_SECOND);
-        millis = millis % (MILLIS_IN_SECOND);
+        long days = millis / Constants.MILLIS_IN_DAY;
+        millis = millis % Constants.MILLIS_IN_DAY;
+        long hours = millis / (Constants.MILLIS_IN_HOUR);
+        millis = millis % (Constants.MILLIS_IN_HOUR);
+        long min = millis / (Constants.MILLIS_IN_MINUTE);
+        millis = millis % (Constants.MILLIS_IN_MINUTE);
+        long secs = millis / (Constants.MILLIS_IN_SECOND);
+        millis = millis % (Constants.MILLIS_IN_SECOND);
 
         return days + "d " + hours + "h " + min + "m " + secs + "s " + millis + "ms";
 

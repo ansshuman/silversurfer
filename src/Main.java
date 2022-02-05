@@ -1,7 +1,7 @@
-import com.silversurfer.time.util.TimeSurfer;
+import time.TimeSurfer;
 
 import java.util.Date;
-import static com.silversurfer.time.util.Constants.*;
+import static time.util.Constants.*;
 
 public class Main {
 

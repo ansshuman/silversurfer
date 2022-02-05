@@ -1,4 +1,4 @@
-package com.silversurfer.time.util;
+package time.util;
 
 public class Constants {
 
