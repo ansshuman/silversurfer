@@ -14,7 +14,7 @@ public class Main {
         };
         TimeSurfer ts = new TimeSurfer(start, end, "10:30:00:000", "18:00:00:000") {
         };
-        System.out.println(default_ts + "\n" + ts);
+        System.out.println(default_ts + "\n\n" + ts);
 
     }
 

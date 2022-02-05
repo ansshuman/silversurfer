@@ -334,8 +334,8 @@ public abstract class TimeSurfer {
     public void addTimeToCal(Calendar cal, long time) {
 
         long calTime = cal.getTimeInMillis();
-        calTime += time;
-        cal.setTime(new Date(calTime));
+        long newTime = calTime + time;
+        cal.setTime(new Date(newTime));
 
     }
 
@@ -368,12 +368,12 @@ public abstract class TimeSurfer {
         long millis = milliseconds;
         long days = millis / MILLIS_IN_DAY;
         millis = millis % MILLIS_IN_DAY;
-        long hours = millis / (MILLIS_IN_HOUR);
-        millis = millis % (MILLIS_IN_HOUR);
-        long min = millis / (MILLIS_IN_MINUTE);
-        millis = millis % (MILLIS_IN_MINUTE);
-        long secs = millis / (MILLIS_IN_SECOND);
-        millis = millis % (MILLIS_IN_SECOND);
+        long hours = millis / MILLIS_IN_HOUR;
+        millis = millis % MILLIS_IN_HOUR;
+        long min = millis / MILLIS_IN_MINUTE;
+        millis = millis % MILLIS_IN_MINUTE;
+        long secs = millis / MILLIS_IN_SECOND;
+        millis = millis % MILLIS_IN_SECOND;
 
         return days + "d " + hours + "h " + min + "m " + secs + "s " + millis + "ms";
 
