@@ -1,4 +1,4 @@
-package time.util;
+package com.github.ansshuman.timesurfer.util;
 
 public class Constants {
 
