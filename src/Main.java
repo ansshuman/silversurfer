@@ -1,8 +1,8 @@
 import com.github.ansshuman.timesurfer.TimeSurfer;
+import static com.github.ansshuman.timesurfer.util.Constants.DAY_IN_MILLIS;
 
 import java.util.Date;
 
-import static com.github.ansshuman.timesurfer.util.Constants.DAY_IN_MILLIS;
 
 public class Main {
 
