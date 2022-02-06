@@ -3,7 +3,6 @@ import static com.github.ansshuman.timesurfer.util.Constants.DAY_IN_MILLIS;
 
 import java.util.Date;
 
-
 public class Main {
 
     public static void main(String[] args) {
